@@ -19,7 +19,18 @@ double stake for 5th round and won: staked $400 won $400, balance = 1300
 NOTE: Your balance is allowed to go below 0 (debt) :(
 */
 
-function martingale(bank, outcomes)
-{
-  //beat the house here...
+const martingale = (bank, outcomes) => {
+  let stake = 100;
+  for(let i = 0; i < outcomes.length; i++) {
+    if(outcomes[i] === 0) {
+      bank -= stake;
+      stake *= 2;
+    }
+    if(outcomes[i] === 1) {
+      bank += stake;
+      stake = 100;
+    }
+  }
+
+  return bank;
 }
